@@ -6,6 +6,7 @@ const handler = async (req, res) => {
   const product = await Product.findById(req.query.id);
   await db.disconnect();
   res.send(product);
+  
 };
 
 export default handler;
