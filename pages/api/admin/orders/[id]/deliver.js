@@ -10,6 +10,8 @@ const handler = async (req, res) => {
   await db.connect();
   const order = await Order.findById(req.query.id);
   if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
     order.isDelivered = true;
     order.deliveredAt = Date.now();
     const deliveredOrder = await order.save();

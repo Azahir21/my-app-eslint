@@ -218,7 +218,7 @@ function OrderScreen() {
                     <div>${totalPrice}</div>
                   </div>
                 </li>
-                {!isPaid && (
+                {!(isPaid || order.paymentMethod == "CashOnDelivery") && (
                   <li>
                     {isPending ? (
                       <div>Loading...</div>
@@ -230,7 +230,7 @@ function OrderScreen() {
                     {loadingPay && <div>Loading...</div>}
                   </li>
                 )}
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                {session.user.isAdmin && (order.isPaid || order.paymentMethod == "CashOnDelivery") && !order.isDelivered && (
                   <li>
                     {loadingDeliver && <div>Loading...</div>}
                     <button className="primary-button w-full" onClick={deliverOrderHandler}>
